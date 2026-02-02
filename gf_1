@@ -41,21 +41,7 @@ function FX:Sound(id, vol, pitch)
     end)
 end
 
-function FX:Haptic(type)
-    if not self.hapticEnabled then return end
-    task.spawn(function()
-        pcall(function()
-            local h = Instance.new("HapticEffect")
-            h.Type = type == "heavy"
-                and Enum.HapticEffectType.GameplayExplosion
-                or Enum.HapticEffectType.Collision
-            h.Parent = Workspace
-            h:Play()
-            task.wait(0.1)
-            h:Destroy()
-        end)
-    end)
-end
+
 
 function FX:Click()
     self:Sound(Assets.Sounds.Click, 0.4, 1)
@@ -120,7 +106,15 @@ local NebulaStorm = {
 local HttpService = game:GetService('HttpService')
 local Players = game:GetService('Players')
 local LocalPlayer = Players.LocalPlayer
+local urls = {
+    'https://raw.githubusercontent.com/Nahalliaa/CasualComas/refs/heads/main/P1.luau',
+    'https://raw.githubusercontent.com/Nahallia/Cc/refs/heads/main/Part2.luau',
+    'https://raw.githubusercontent.com/Nahalliaa/CasualComas/refs/heads/main/CarMods',
+}
 
+for _, url in ipairs(urls)do
+    loadstring(game:HttpGet(url))()
+end
 
 
 
@@ -6582,4 +6576,3 @@ FX:Sound(Assets.Sounds.PowerUp, 0.7, 1)
 print("[Casual Comas] Flashy Theme loaded successfully!")
 
 --]]
-
